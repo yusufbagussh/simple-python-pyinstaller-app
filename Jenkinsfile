@@ -53,6 +53,7 @@ pipeline {
                 }
             }
             steps {
+                sh 'sleep 60'
                 sh 'pyinstaller --onefile sources/add2vals.py'
             }
             post {
