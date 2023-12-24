@@ -12,7 +12,12 @@ node {
     stage('Manual Approve') {
         docker.image('python:2-alpine').inside {
             input message: 'Sudah selesai menggunakan React App? (Klik "Proceed" untuk mengakhiri)' 
+        }
+    }
+    stage('Deploy') {
+        docker.image('python:2-alpine').inside {
             sh 'sleep 60'
+            sh './jenkins/scripts/kill.sh'
         }
     }
 }
