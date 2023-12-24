@@ -10,9 +10,9 @@ node {
         }
     }
     stage('Manual Approve') {
-        docker.image('cdrx/pyinstaller-linux:python2').inside {
-            sh 'pyinstaller --onefile sources/add2vals.py'
+        docker.image('python:2-alpine').inside {
             input message: 'Sudah selesai menggunakan React App? (Klik "Proceed" untuk mengakhiri)' 
+            sh 'sleep 60'
         }
     }
 }
