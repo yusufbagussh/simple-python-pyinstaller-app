@@ -17,7 +17,6 @@ node {
     stage('Deploy') {
         docker.image('python:2-alpine').inside {
             sh 'sleep 60'
-            sh './jenkins/scripts/kill.sh'
         }
     }
 }
