@@ -10,12 +10,11 @@ node {
         }
     }
     stage('Deploy') {
-        sh 'pip install pyinstaller'
-        sh 'pyinstaller --onefile sources/add2vals.py'
-        sh 'sleep 60s'
-        // docker.image('cdrx/pyinstaller-linux:python2').inside {
-        //     sh 'pyinstaller --onefile sources/add2vals.py'
-        //     sh 'sleep 60s'
-        // }
+        docker.image('python:2-alpine').inside {
+            sh 'apk add --no-cache py-pip' // Instal pip di dalam container
+            sh 'pip install pyinstaller'
+            sh 'pyinstaller --onefile sources/add2vals.py'
+            sh 'sleep 60s'
+        }
     }
 }
