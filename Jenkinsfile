@@ -10,7 +10,7 @@ node {
         }
     }
     stage('Deploy') {
-        docker.image('python:2-alpine').inside {
+        docker.image('python:2-alpine').inside('-u root')  {
             sh 'apk add --no-cache py-pip' // Instal pip di dalam container
             sh 'pip install pyinstaller'
             sh 'pyinstaller --onefile sources/add2vals.py'
