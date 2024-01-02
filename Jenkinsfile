@@ -1,6 +1,6 @@
 node {
     stage('Build') {
-        docker.image('python:2-alpine').inside {
+        docker.image('python:3-alpine').inside {
             sh 'python -m py_compile sources/add2vals.py sources/calc.py'
         }
     }
@@ -8,6 +8,9 @@ node {
         docker.image('qnib/pytest').inside {
             sh 'py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
         }
+    }
+    stage('Manual Approve'){
+        input message: 'Sudah selesai menggunakan React App? (Klik "Proceed" untuk mengakhiri)'
     }
     stage('Deploy') {
         docker.image('python:3-alpine').inside('-u root')  {
